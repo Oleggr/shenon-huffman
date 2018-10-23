@@ -83,6 +83,7 @@ class DataTransmissionChannel():
                 self._count_ones += 1
         return self._count_ones
 
+    
 class SecretDataTransmissionChannel():
     '''Класс секретного канала передачи данных'''
     '''Этот канал необходим для передачи закодированного алфавита'''
