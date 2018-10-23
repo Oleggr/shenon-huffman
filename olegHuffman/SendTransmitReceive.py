@@ -1,10 +1,10 @@
 class Source():
     '''Класс источника данных'''
 
-    _FILENAME = 'text.txt'
+    _FILENAME = 'text.txt' 
 
     def __init__(self):
-        pass   
+          pass
 
     def insert_message(self, user: str, message: str) -> None:
         self._user = user
@@ -14,10 +14,11 @@ class Source():
         self._user = user
         temp_mess = ''
 
-        with open(_FILENAME, 'r', encoding='utf-8') as f:
-            while True:
-                temp_mess = f.readline()
-                if not temp_mess:
+        with open(self._FILENAME, 'r', encoding='utf-8') as f:
+            while True: 
+                temp_mess += f.readline()
+                last_line_in_file = f.readline()
+                if not last_line_in_file:
                     break
 
         self._message = temp_mess
