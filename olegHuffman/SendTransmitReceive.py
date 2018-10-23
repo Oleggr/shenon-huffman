@@ -38,12 +38,9 @@ class Source():
                 
     def encode_message(self) -> str:
         self._code = huffman_encode(self._message)
-        self._encoded_message = "".join(self._code[ch] for ch in self._message)
+        self._encoded_message = "".join(self._code[symbol] for symbol in self._message)
 
     def send_message(self) -> str:
-        return self._user, self._message
-
-    def send_encoded_message(self) -> str:
         return self._user, self._encoded_message
 
     def send_encoded_alphabet(self):
@@ -54,7 +51,9 @@ class DataTransmissionChannel():
     '''Класс канала передачи данных'''
 
     def __init__(self):
-        pass
+        self._count_symbols = 0
+        self._count_zeros = 0
+        self._count_ones = 0
 
     def get_message(self, user, message):
         self._user = user
@@ -68,14 +67,21 @@ class DataTransmissionChannel():
         pass
 
     def count_symbols(self):
-        pass
+        for _ in self._message:
+            self._count_symbols += 1
+        return self._count_symbols
 
     def count_zeros(self):
-        pass
+        for i in self._message:
+            if i == '0':
+                self._count_zeros += 1
+        return self._count_zeros
 
     def count_ones(self):
-        pass
-
+        for i in self._message:
+            if i == '1':
+                self._count_ones += 1
+        return self._count_ones
 
 class SecretDataTransmissionChannel():
     '''Класс секретного канала передачи данных'''
