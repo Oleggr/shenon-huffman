@@ -1,40 +1,38 @@
 from SendTransmitReceive import *
 
-a = Source()
-aa = Source()
+transmitter = Source()
+chanel = DataTransmissionChannel()
+secret_chanel = SecretDataTransmissionChannel()
+receiver = Receiver()
 
-b = Receiver()
+user = 'oleg'
+message = 'test test test'
 
-c = DataTransmissionChannel()
+transmitter.insert_message(user, message)
+transmitter.encode_message()
 
-usr = input('User: ')
-mes = input('Messg: ')
+secret_chanel.get_secret_message(transmitter.send_encoded_alphabet())
+receiver.get_encoded_alphabet(secret_chanel.return_secret_message())
 
-a.insert_message(usr,mes)
-aa.read_message_from_file(usr)
+chanel.get_message(
+    transmitter.send_encoded_message()[0],
+    transmitter.send_encoded_message()[1]
+)
 
-# Отправляем по каналу сообщение из источника "a"
+receiver.get_message(
+    chanel.return_message()[0],
+    chanel.return_message()[1]
+)
 
-tmp_user_a = a.send_message()[0]
-tmp_mess_a = a.send_message()[1]
+receiver.decode_message()
 
-c.get_message(tmp_user_a, tmp_mess_a)
+print('передатчик закод. сообщ.: ', transmitter.send_encoded_message())
+print('передатчик алфавит: ', transmitter.send_encoded_alphabet(), '\n')
 
-tmp_user_a_1 = c.return_message()[0]
-tmp_mess_a_1 = c.return_message()[1]
+print('канал закод. сообщ.: ', chanel.return_message(), '\n')
 
-# Отправляем по каналу сообщение из источника "aa"
+print('секр. канал алфавит:', secret_chanel.return_secret_message(), '\n')
 
-tmp_user_aa = aa.send_message()[0]
-tmp_mess_aa = aa.send_message()[1]
-
-c.get_message(tmp_user_aa, tmp_mess_aa)
-
-tmp_user_aa_1 = c.return_message()[0]
-tmp_mess_aa_1 = c.return_message()[1]
-
-b.get_message(tmp_user_a_1, tmp_mess_a_1)
-print(b.show_message())
-
-b.get_message(tmp_user_aa_1, tmp_mess_aa_1)
-print(b.show_message())
+print('приемник раскод. сообщ.: ', receiver.show_message())
+print('приемник закод. сообщ.: ', receiver._show_encoded_message())
+print('приемник алфавит: ', receiver._show_encoded_alphabet(), '\n')
