@@ -55,7 +55,8 @@ class DataTransmissionChannel():
         self._message = message
 
     def return_message(self):
+        self._noise_adder()
         return self._user, self._message
 
-    def noise_adder(self):
+    def _noise_adder(self):
         pass
