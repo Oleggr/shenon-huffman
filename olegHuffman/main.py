@@ -1,4 +1,4 @@
-from SendTransmitReceive import *
+from HuffmanClasses import *
 
 transmitter = Source()
 chanel = DataTransmissionChannel()
@@ -26,16 +26,18 @@ receiver.get_message(
 
 receiver.decode_message()
 
+print()
 print('передатчик| закод. сообщ.: ', transmitter.send_message())
 print('передатчик| алфавит: ', transmitter.send_encoded_alphabet(), '\n')
 
 print('канал| закод. сообщ.: ', chanel.return_message())
-print('канал| кол-во символов: ', chanel.count_symbols())
-print('канал| кол-во нулей: ', chanel.count_zeros())
-print('канал| кол-во единиц: ', chanel.count_ones(), '\n')
+print('канал| Σ символов: ', chanel.count_symbols())
+print('канал| Σ 0: ', chanel.count_zeros())
+print('канал| Σ 1: ', chanel.count_ones(), '\n')
 
 print('секр. канал| алфавит:', secret_chanel.return_secret_message(), '\n')
 
 print('приемник| раскод. сообщ.: ', receiver.show_message())
 print('приемник| закод. сообщ.: ', receiver._show_encoded_message())
-print('приемник| алфавит: ', receiver._show_encoded_alphabet(), '\n')
+print('приемник| алфавит: ', receiver._show_encoded_alphabet())
+print()

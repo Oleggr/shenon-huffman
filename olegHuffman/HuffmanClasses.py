@@ -1,12 +1,12 @@
-from huff_1 import *
+from HuffmanEncode import *
 
 class Source():
     '''Класс источника данных'''
 
-    _FILENAME = 'text.txt' 
+    _FILENAME = 'text.txt'
 
     def __init__(self):
-          pass
+        pass
 
     def insert_message(self, user: str, message: str) -> None:
         self._user = user
@@ -17,16 +17,8 @@ class Source():
         temp_mess = ''
 
         with open(self._FILENAME, 'r', encoding='utf-8') as f:
-            while True: 
-                # prev_pos = f.tell()
-                # temp_mess += f.readline()
+            while True:
 
-                # next_pos = f.tell()
-                # delta_pos = next_pos - prev_pos
-
-                # f.seek(delta_pos, 1)
-                # last_line_in_file = f.readline()
-                
                 last_line_in_file = f.readline()
                 temp_mess += last_line_in_file
 
@@ -35,10 +27,11 @@ class Source():
                     break
 
         self._message = temp_mess
-                
+
     def encode_message(self) -> str:
         self._code = huffman_encode(self._message)
-        self._encoded_message = "".join(self._code[symbol] for symbol in self._message)
+        self._encoded_message = "".join(
+            self._code[symbol] for symbol in self._message)
 
     def send_message(self) -> str:
         return self._user, self._encoded_message
@@ -101,8 +94,8 @@ class Receiver():
     '''Класс приемника данных'''
 
     def __init__(self):
-        pass 
-        
+        pass
+
     def get_message(self, user, encoded_message):
         self._user = user
         self._encoded_message = encoded_message
