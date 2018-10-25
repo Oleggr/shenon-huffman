@@ -52,12 +52,12 @@ class DataTransmissionChannel():
         self._user = user
         self._message = message
 
-    def return_message(self):
-        self._noise_adder()
+    def return_clear_message(self):
         return self._user, self._message
 
-    def _noise_adder(self):
-        pass
+    def return_noised_message(self):
+        self._noised_message = noise_adder(self._message)
+        return self._user, self._noised_message
 
     def count_symbols(self):
         for _ in self._message:
@@ -76,7 +76,7 @@ class DataTransmissionChannel():
                 self._count_ones += 1
         return self._count_ones
 
-    
+
 class SecretDataTransmissionChannel():
     '''Класс секретного канала передачи данных'''
     '''Этот канал необходим для передачи закодированного алфавита'''
