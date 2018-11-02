@@ -5,8 +5,6 @@ import heapq
 from collections import Counter
 from collections import namedtuple
 
-from random import randint
-
 # Добавим классы для хранения информации о структуре дерева
 # Воспользуемся функцией namedtuple из стандартной библиотеки
 
@@ -35,7 +33,7 @@ def huffman_encode(s):
     h = []
 
     # Построим очередь с помощью цикла, добавив счетчик, уникальный для всех листьев
-    for ch, freq in Counter(s).items():
+    for ch, freq in counter_items_for_2_symbols(s):
 
         # Очередь будет представлена частотой символа, счетчиком и самим символом
         h.append((freq, len(h), Leaf(ch)))
@@ -47,10 +45,12 @@ def huffman_encode(s):
 
     # Пока в очереди есть хотя бы 2 элемента
     while len(h) > 1:
+
         # Вытащим элемент с минимальной частотой - левый узел
         freq1, _count1, left = heapq.heappop(h)
         # Вытащим следующий элемент с минимальной частотой - правый узел
         freq2, _count2, right = heapq.heappop(h)
+
         # Поместим в очередь новый элемент, у которого частота 
         # равна сумме частот вытащенных элементов
 
@@ -98,28 +98,55 @@ def huffman_decode(encoded, code):
     # Вернем значение раскодированной строки
     return ''.join(sx)
 
-def noise_adder(message, noise_percent = 10):
 
-    noise_amount = round((noise_percent * len(message)) / 100)
+def huffman_get_encode_message(code, message):
 
-    print('Количество символов, заменненных помехами:',noise_amount)
+    return_str = ''
+    temp_str = ''
+    temp_code = ''
 
-    already_changed = []
+    for i in range(0, len(message), 2):
+        temp_str = message[i] + message[i + 1]
 
-    for i in range(0, int(noise_amount)):
-        print(i, 'символ заменен')
-        while True:
-                
-            random_number = randint(0, len(message) - 1)
-
-            if random_number not in already_changed:
-                already_changed.append(random_number)
-                if message[random_number] == '1':
-                    message = message[:random_number] \
-                            + '0' + message[random_number + 1:]
-                else:
-                    message = message[:random_number] \
-                            + '1' + message[random_number + 1:]
+        for key in code:
+            if key == temp_str:
+                temp_code = code[key]
                 break
-    print(message)
-    return message
+
+        return_str += temp_code
+
+    return return_str#"".join(code[symbol] for symbol in message)
+
+
+def remove_spaces(line):
+    temp_list = line.split()
+    new_line = ''
+
+    for element in temp_list:
+        new_line += element
+
+    return new_line 
+
+
+def counter_items_for_2_symbols(line):
+    symbols_list = []
+    return_list = []
+    dict_counter = {}
+
+    # line = remove_spaces(line)
+
+    if (len(line) % 2):
+        line += 'Q'
+
+    for i in range(0, len(line), 2):
+        symbols_list.append(line[i] + line[i + 1])
+
+    for symbol in symbols_list:
+        dict_counter[symbol] = symbols_list.count(symbol)
+
+    for key in dict_counter:
+        val = dict_counter[key]
+        temp_tuple = (key, val)
+        return_list.append(temp_tuple)
+
+    return return_list

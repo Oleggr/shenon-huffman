@@ -1,4 +1,5 @@
-from HuffmanEncode import *
+from huffman_encode_2 import *
+from noise_adder import *
 
 class Source():
     '''Класс источника данных'''
@@ -10,7 +11,7 @@ class Source():
 
     def insert_message(self, user: str, message: str) -> None:
         self._user = user
-        self._message = message
+        self._message = message.lower()
 
     def read_message_from_file(self, user):
         self._user = user
@@ -30,10 +31,14 @@ class Source():
 
     def encode_message(self) -> str:
         self._code = huffman_encode(self._message)
-        self._encoded_message = "".join(
-            self._code[symbol] for symbol in self._message)
+        print(self._code)
+        self._encoded_message = \
+                huffman_get_encode_message(self._code,self._message)
 
-    def send_message(self) -> str:
+    def send_message(self):
+        return self._user, self._message
+
+    def send_encoded_message(self) -> str:
         return self._user, self._encoded_message
 
     def send_encoded_alphabet(self):
