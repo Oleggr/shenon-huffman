@@ -1,4 +1,4 @@
-from HuffmanClasses import *
+from huffman_classes import *
 # import pdb; pdb.set_trace() 
 
 # Передатчик
@@ -74,4 +74,6 @@ print()
 print('\x1b[1;30mЕще раз, для сравнения:')
 print('\x1b[1;30mпередатчик \x1b[0mсообщ.:', '\t\t\t', transmitter.send_message())
 print('\x1b[1;30mприем. с помехами \x1b[0mраскод. сообщ.:', '\t', receiver_noised.show_message())
+print('\x1b[1;30mпередатчик \x1b[0mзакод. сообщ.:', '\t', transmitter.send_encoded_message())
+print('\x1b[1;30mприем. с помехами \x1b[0mзакод. сообщ.:', receiver_noised._show_encoded_message())
 print()

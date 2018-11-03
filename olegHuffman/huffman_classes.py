@@ -1,4 +1,5 @@
-from huffman_encode_2 import *
+# from huffman_encode import *
+from huffman_encode_block import *
 from noise_adder import *
 
 class Source():
@@ -62,6 +63,7 @@ class DataTransmissionChannel():
 
     def return_noised_message(self):
         self._noised_message = noise_adder(self._message)
+        # self._noised_message = noise_adder_random(self._message)
         return self._user, self._noised_message
 
     def count_symbols(self):

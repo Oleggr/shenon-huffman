@@ -1,7 +1,9 @@
 from random import randint
 
 # Функция добавления шума в строку двоичных символов
-def noise_adder(message, noise_percent = 10):
+# Добавление шума производится случайным образом,
+# исходя из необходимого процента шума и длины строки
+def noise_adder_random(message, noise_percent = 10):
 
     # Здесь вычисляется количествосимволов, которое 
     # должно быть заменено, соответственно проценту шума
@@ -33,4 +35,16 @@ def noise_adder(message, noise_percent = 10):
                             + '1' + message[random_number + 1:]
                 break
 
+    return message
+
+def noise_adder(message):
+    replace_number = 3
+
+    if message[replace_number] == '1':
+        message = message[:replace_number] \
+                + '0' + message[replace_number + 1:]
+    else:
+        message = message[:replace_number] \
+                + '1' + message[replace_number + 1:]
+                            
     return message
