@@ -15,7 +15,8 @@ receiver_noised = Receiver()
 
 # Исходные данные
 user = 'oleg'
-message = 'test test testtest test tt'
+message = 'test test \ntesttest tes.,/t tt'
+print(message)
 
 # Получение сообщение передатчиком 
 # и шифрование этого сообщения

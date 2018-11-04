@@ -1,6 +1,7 @@
-# from huffman_encode import *
-from huffman_encode_block import *
+from huffman_encode import *
+# from huffman_encode_block import *
 from noise_adder import *
+from text_format import text_format
 
 class Source():
     '''Класс источника данных'''
@@ -12,7 +13,7 @@ class Source():
 
     def insert_message(self, user: str, message: str) -> None:
         self._user = user
-        self._message = message.lower()
+        self._message = text_format(message)
 
     def read_message_from_file(self, user):
         self._user = user
