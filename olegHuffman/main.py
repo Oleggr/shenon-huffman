@@ -15,12 +15,12 @@ receiver_noised = Receiver()
 
 # Исходные данные
 user = 'oleg'
-message = 'test test \ntesttest tes.,/t tt'
-print(message)
+message = 'TestIsCool'
 
 # Получение сообщение передатчиком 
 # и шифрование этого сообщения
 transmitter.insert_message(user, message)
+# transmitter.read_message_from_file(user)
 transmitter.encode_message()
 
 # Передача через секретный канал связи 
@@ -53,11 +53,20 @@ receiver_noised.get_message(
 # Декодирование шифрованного измененного сообщения
 receiver_noised.decode_message()
 
+transmitter_encoded_alphabet = transmitter.send_encoded_alphabet()
+
 # Вывод на экран результатов работы программы на каждом шаге
 print()
 print('\x1b[1;30mпередатчик \x1b[0mсообщ.:', transmitter.send_message())
 print('\x1b[1;30mпередатчик \x1b[0mзакод. сообщ.:', transmitter.send_encoded_message())
 print('\x1b[1;30mпередатчик \x1b[0mалфавит:', transmitter.send_encoded_alphabet())
+
+# for key in transmitter_encoded_alphabet:
+#     print('\'' + key + '\'', transmitter_encoded_alphabet[key])
+
+print('\x1b[1;30mпередатчик \x1b[0mдлина текста:', transmitter.return_text_length())
+print('\x1b[1;30mпередатчик \x1b[0mдлина закод. текста:', transmitter.return_encoded_text_length())
+print('\x1b[1;30mпередатчик \x1b[0mсред. длина код. слова:' , transmitter.middle_count_of_symbols_per_letter())
 print()
 print('\x1b[1;30mканал \x1b[0mзакод. сообщ.:', chanel.return_clear_message())
 print('\x1b[1;30mканал \x1b[0mΣ символов:', chanel.count_symbols())

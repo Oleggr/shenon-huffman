@@ -34,7 +34,8 @@ def huffman_encode(s):
 
     # Построим очередь с помощью цикла, добавив счетчик, уникальный для всех листьев
     for ch, freq in counter_items_for_2_symbols(s):
-
+        print(ch, freq, counter_items_for_2_symbols(s))
+        print()
         # Очередь будет представлена частотой символа, счетчиком и самим символом
         h.append((freq, len(h), Leaf(ch)))
 
@@ -71,7 +72,7 @@ def huffman_encode(s):
 
         # Обойдем дерева от корня и заполним словарь для получения кодирования Хаффмана
         root.walk(code, '')
-
+    print(code)
     # Возвращаем словарь символов и соответствующих им кодов
     return code
 
@@ -105,8 +106,8 @@ def huffman_get_encode_message(code, message):
     temp_str = ''
     temp_code = ''
 
-    for i in range(0, len(message), 2):
-        temp_str = message[i] + message[i + 1]
+    for i in range(0, len(message), 1):
+        temp_str = message[i]
 
         for key in code:
             if key == temp_str:
@@ -128,11 +129,11 @@ def counter_items_for_2_symbols(line):
     if (len(line) % 2):
         line += 'Q'
 
-    for i in range(0, len(line), 2):
-        symbols_list.append(line[i] + line[i + 1])
+    for i in range(0, len(line), 1):
+        symbols_list.append(line[i])
 
     for symbol in symbols_list:
-        dict_counter[symbol] = symbols_list.count(symbol)
+        dict_counter[symbol] = 1
 
     for key in dict_counter:
         val = dict_counter[key]

@@ -1,0 +1,9 @@
+				x9x5x10x8x2x6x7x4x1x3
+				   /	 		\
+			x9x5x10x8x2x6	    x7x4x1x3
+	        /		\			 /	   \
+    x9x5x10x8       x2x6       x7x4    x1x3
+    /       \       /  \       /  \    /  \
+  x9x5    x10x8    x2  x6     x7  x4  x1  x3
+  /  \     /  \
+ x9  x5   x10  x8

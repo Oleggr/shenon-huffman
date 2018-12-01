@@ -1,5 +1,6 @@
-from huffman_encode import *
+# from huffman_encode import *
 # from huffman_encode_block import *
+from huffman_encode_evenly import *
 from noise_adder import *
 from text_format import text_format
 
@@ -26,14 +27,13 @@ class Source():
                 temp_mess += last_line_in_file
 
                 if not last_line_in_file:
-                    print('Текст из файла:\n' + temp_mess)
+                    # print('Текст из файла:\n' + temp_mess)
                     break
 
-        self._message = temp_mess
+        self._message = text_format(temp_mess)
 
     def encode_message(self) -> str:
         self._code = huffman_encode(self._message)
-        print(self._code)
         self._encoded_message = \
                 huffman_get_encode_message(self._code,self._message)
 
@@ -45,6 +45,15 @@ class Source():
 
     def send_encoded_alphabet(self):
         return self._code
+
+    def return_text_length(self):
+        return len(self._message)
+
+    def return_encoded_text_length(self):
+        return len(self._encoded_message)
+
+    def middle_count_of_symbols_per_letter(self):
+        return round((len(self._encoded_message) / len(self._message)), 2)
 
 
 class DataTransmissionChannel():
